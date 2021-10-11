@@ -1,4 +1,6 @@
 I have been asked far too often in interviews the following:
+what is a promise 
+A Promise is an object that represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.
 
 describe a closure
 When a function is defined in another function and it has access to the outer function's context even after the outer function returns.
@@ -12,6 +14,56 @@ function foo() {
 const f = foo() // `secret` is not directly accessible from outside `foo`
 f() // The only way to retrieve `secret`, is to invoke `f`
 f then stores the inner function and then gets executed again to return secret
+
+What is closure?
+Context is always the value of the this keyword which is a reference to the object that “owns” the currently executing code or the function where it’s looked at.
+
+arrow function difference 
+Arrow functions don't have their own this or arguments binding. Instead, those identifiers are resolved in the lexical scope like any other variable. 
+That means that inside an arrow function, this and arguments refer to the values of this and arguments in the environment the arrow function is defined in 
+(i.e. "outside" the arrow function):
+
+array.map
+The Array.map() method allows you to iterate over an array and modify its elements using a callback function. 
+The callback function will then be executed on each of the array's elements.
+
+array.reduce
+The reduce() method executes a user-supplied “reducer” callback function on each element of the array, passing in the return value from the calculation on the preceding element. 
+The final result of running the reducer across all elements of the array is a single value.
+
+debouncing and throttling
+Debouncing and throttling are techniques in javascript to optimise the application and browser performance.
+Debounce function limits the execution of a function call and waits for a certain amount of time before running it again.
+
+const debounceFunc = (func, delay) => {
+   let timer;
+    return function(...args) {
+       const context = this;
+       clearTimeOut(timer);
+       timer = setTimeOut(() => {
+           func.apply(context, args);
+       }, delay)
+     }
+
+Throttling is a technique, to limit the execution of an event handler function, even when this event triggers continuously due to user actions. (ex: browser resizing)
+
+const throttleFunc = (func, interval) => {
+     let shouldFire = true;
+   return function() {
+         if (shouldFire) {
+             func();
+             shouldFire = false;
+             setTimeOut(() => {
+               shouldFire = true;
+              }, interval)
+          }
+       }
+
+prototype Inheritence
+Unlike most other object-oriented languages, JavaScript doesn’t actually have a concept of classes. 
+In most other object-oriented languages you would instantiate an instance of a particular class, but that is not the case in JavaScript.
+In JavaScript, objects can create new objects, and objects can inherit from other objects.
+This whole concept is called prototypal inheritance.
 
 what is the difference between const, let, and var?
 var declarations are globally scoped or function scoped while let and const are block scoped.
@@ -104,7 +156,7 @@ General JS Assessment
 easier?
 ● What are some of your favorite things about JavaScript in general?
 ● What is a SPA?
-	single page application 
+	single page application - dynamically writting curent web page with new data from web server
 ● What is ES6?
 	ECMAScript 2015 is also known as ES6 and ECMAScript 6.
 ● What are some of your favorite things about ES6?
@@ -205,9 +257,15 @@ Template literals allow expressions in strings: let total = `Total: ${(price * (
 	Allows for cleaner neater functions
 cant be used as a constructor cant be called with new, don;t have their own this or argument binding
 
-● What is the spread operator? For bonus points, when working with arrays, how was this
+● What is the spread operator? For bonus points, when working with arrays, how was this accomplished prior to the advent of the spread operator? (array.apply())
+	allows an iterable such as an array expression or string to be expanded
+	return newArr.reduce((array, num) => {
+   if(!array.includes(num)) {
+     array.push(num);
+   }
+   return array;
+}, []);
 
-accomplished prior to the advent of the spread operator? (array.apply())
 ○ What is a pitfall (gotcha) of copying an array with newArray = ...[]
 ● What is the difference between for ... of versus for ... in?
 
@@ -339,6 +397,7 @@ Angular 2+
 
 ● Why is one way the NgDestroy lifecycle hook can be helpful?
 ● What’s the difference between Observables and Promises?
+
 ● What RxJS method is used to access the data being emitted by an Observable?
 ● What is ViewEncapsulation?
 ● What is a RouterOutlet?
